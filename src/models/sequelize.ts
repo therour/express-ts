@@ -1,9 +1,11 @@
 import { Sequelize } from "sequelize"
-import ENV from "../env"
+import config from "../config"
 
-const sequelize = new Sequelize({
-  dialect: ENV.DB_DIALECT,
-  storage: ENV.DB_DATABASE,
-})
+const sequelize = new Sequelize(
+  config.db.database,
+  config.db.username,
+  config.db.password,
+  config.db,
+)
 
 export default sequelize
