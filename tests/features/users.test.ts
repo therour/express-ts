@@ -12,7 +12,7 @@ describe("GET /api/v1/users", () => {
     const response = await request(app).get("/api/v1/users")
 
     expect(response.status).toBe(200)
-    expect(response.body).toEqual([
+    expect(response.body.data).toEqual([
       expect.objectContaining({
         name: "test",
         email: "test@email.com",
@@ -29,7 +29,7 @@ describe("POST /api/v1/users", () => {
     })
 
     expect(response.status).toBe(200)
-    expect(response.body).toEqual(
+    expect(response.body.data).toEqual(
       expect.objectContaining({
         name: "test",
         email: expect.any(String),

@@ -12,7 +12,7 @@ const router = Router()
 
 router.get("/users", async (req, res) => {
   const users = await User.findAll()
-  return res.send(users)
+  res.json({ data: users })
 })
 
 router.post("/users", async (req, res) => {
@@ -20,10 +20,12 @@ router.post("/users", async (req, res) => {
     const payload = createUserPayloadSchema.parse(req.body)
 
     const user = await User.create(payload)
-    return res.send(user)
+    res.json({ data: user })
+    return
   } catch (err) {
     logger.error(err)
-    return res.status(400).json({ message: "Invalid JSON" })
+    res.status(400).json({ message: "Invalid JSON" })
+    return
   }
 })
 
