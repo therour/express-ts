@@ -1,6 +1,10 @@
 dist/
 node_modules/
+coverage/
 
 *.sqlite
 
 .env
+.env.test
+
+.vscode/

@@ -1,18 +1,17 @@
 import { Server } from "http"
-import { createServer } from "./server"
+import app from "./app"
 import ENV from "./env"
 import { sequelize } from "./models"
+import logger from "./utils/logger"
 
 let runningServer: Server
 const run = async () => {
   await sequelize.authenticate().then(() => {
-    console.log("Connection has been established successfully.")
+    logger.debug("sequelize Connection has been established successfully.")
   })
 
-  const server = createServer()
-
-  runningServer = server.listen(ENV.PORT, () => {
-    console.log(`api running on ${ENV.PORT}`)
+  runningServer = app.listen(ENV.PORT, () => {
+    logger.debug(`api running on ${ENV.PORT}`)
   })
 }
 run()
@@ -21,7 +20,7 @@ const exitHandler = () => {
   if (runningServer) {
     sequelize.close().then(() => {
       runningServer.close(() => {
-        console.log("server closed")
+        logger.debug("server closed")
         process.exit(1)
       })
     })
@@ -31,7 +30,7 @@ const exitHandler = () => {
 }
 
 const unexpectedErrorHandler = (err: unknown) => {
-  console.error(err)
+  logger.error(err)
   exitHandler()
 }
 
@@ -39,7 +38,7 @@ process.on("uncaughtException", unexpectedErrorHandler)
 process.on("unhandledRejection", unexpectedErrorHandler)
 
 process.on("SIGTERM", () => {
-  console.info("SIGTERM received")
+  logger.info("SIGTERM received")
   if (runningServer) {
     runningServer.close()
   }

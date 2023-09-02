@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
+    "types": ["node", "jest"],
     "target": "ESNext",
     "module": "commonjs",
     "outDir": "dist",
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "baseUrl": "./"
   },
-  "exclude": ["node_modules", "dist"],
-  "include": ["src", ".sequelizerc"]
+  "include": ["src", "tests", ".sequelizerc", "jest.config.ts"]
 }

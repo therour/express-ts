@@ -11,6 +11,7 @@ const db = {
       rejectUnauthorized: false,
     },
   },
+  ssl: ENV.DB_SSL,
 
   // only used when dialect is sqlite
   storage: ENV.DB_DATABASE,
