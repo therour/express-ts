@@ -6,7 +6,12 @@ const envSchema = z.object({
     .or(z.literal("production"))
     .or(z.literal("test"))
     .default("production"),
+  HOST: z.string().default("127.0.0.1"),
   PORT: z.string().default("3000"),
+  APP_CORS_ORIGIN: z
+    .string()
+    .default("*")
+    .transform((val) => (val === "*" ? val : val.split(","))),
 
   DB_DIALECT: z.literal("sqlite").or(z.literal("mysql")).or(z.literal("postgres")),
   DB_DATABASE: z.string(),

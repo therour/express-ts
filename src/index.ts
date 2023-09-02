@@ -1,8 +1,8 @@
 import { Server } from "http"
 import app from "./app"
-import ENV from "./env"
 import { sequelize } from "./models"
 import logger from "./utils/logger"
+import config from "./config"
 
 let runningServer: Server
 const run = async () => {
@@ -10,8 +10,10 @@ const run = async () => {
     logger.debug("sequelize Connection has been established successfully.")
   })
 
-  runningServer = app.listen(ENV.PORT, () => {
-    logger.debug(`api running on ${ENV.PORT}`)
+  const listenPath = `${config.app.host}:${config.app.port}`
+
+  runningServer = app.listen(listenPath, () => {
+    logger.debug(`api running on ${listenPath}`)
   })
 }
 run()

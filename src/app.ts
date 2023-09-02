@@ -2,6 +2,7 @@ import express, { ErrorRequestHandler } from "express"
 import cors from "cors"
 import router from "./routes"
 import logger, { requestLogger } from "./utils/logger"
+import config from "./config"
 
 const app = express()
 
@@ -10,7 +11,12 @@ app
   .use(requestLogger)
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
-  .use(cors())
+  .use(
+    cors({
+      origin: config.app.cors.origin,
+      allowedHeaders: ["Content-Type", "Authorization"],
+    }),
+  )
 
 app.use("/", router)
 
