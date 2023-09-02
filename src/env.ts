@@ -14,6 +14,7 @@ const envSchema = z.object({
   DB_USER: z.string().default(""),
   DB_PASS: z.string().default(""),
   DB_HOST: z.string().default(""),
+  DB_PORT: z.number().optional(),
   DB_SSL: z
     .literal("true")
     .or(z.literal("false"))

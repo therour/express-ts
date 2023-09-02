@@ -41,8 +41,10 @@ jobs:
         run: npm install
       - name: Run tests
         env:
-          DB_HOST: mysql
+          DB_HOST: localhost
+          DB_PORT: 3306
           DB_USER: root
-          DB_PASSWORD: newpassword
-          DB_NAME: test
+          DB_PASS: newpassword
+          DB_DATABASE: test
+          DB_SSL: false
         run: npm run test

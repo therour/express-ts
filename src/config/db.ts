@@ -5,6 +5,7 @@ const db = {
   password: ENV.DB_PASS,
   database: ENV.DB_DATABASE,
   host: ENV.DB_HOST,
+  port: ENV.DB_PORT,
   dialect: ENV.DB_DIALECT,
   dialectOptions: {
     ssl: {
