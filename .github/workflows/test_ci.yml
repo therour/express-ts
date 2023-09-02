@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
-      - name: Run tests
+      - name: Run tests and coverage
         env:
           DB_HOST: localhost
           DB_PORT: 3306
@@ -47,4 +47,9 @@ jobs:
           DB_PASS: newpassword
           DB_DATABASE: test
           DB_SSL: false
-        run: npm run test
+        run: npm run coverage
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
